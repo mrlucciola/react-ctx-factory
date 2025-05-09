@@ -1,0 +1,56 @@
+name: Apply issue labels and assignees when opening PR
+run-name: "Applying issue attributes to PR #${{ github.event.pull_request.number }} from branch ${{ github.event.pull_request.head.ref }}"
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+jobs:
+  apply-attributes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Linked Issue
+        id: check-issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const pr = context.payload.pull_request;
+            const branchName = pr.head.ref;
+            const issueNumberFromBranch = branchName.split("-")[0];
+            const issueNumberFromBody = !!pr.body ? pr.body.match(/#(\d+)/)?.[1] : null;
+            const issueNumber = issueNumberFromBranch || issueNumberFromBody || null
+            if (!issueNumber) {
+              core.setFailed('No linked issue found in PR description');
+              return;
+            }
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber
+            });
+            return issue.data;
+
+      - name: Apply Attributes
+        if: steps.check-issue.outputs.result
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue = ${{ steps.check-issue.outputs.result }};
+            const pr = context.payload.pull_request;
+
+            const updateFields = {};
+
+            // Apply assignee, labels, milestone
+            if (issue.assignees.length > 0) updateFields.assignees = issue.assignees.map(a => a.login);
+            if (issue.labels.length > 0) updateFields.labels = issue.labels.map(l => l.name);
+            if (issue.milestone) updateFields.milestone = issue.milestone.number;
+
+            // Apply all updates
+            if (Object.keys(updateFields).length > 0) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                ...updateFields,
+              });
+            }

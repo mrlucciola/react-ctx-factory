@@ -1,0 +1,27 @@
+{
+  "useCtx": {
+    "prefix": "rfctx",
+    "body": [
+      "export const { use$1Ctx, $1Provider } = useCtxFactory(() => {",
+      "  const [isLoading, setIsLoading] = useState(false);",
+      "",
+      "  return {",
+      "    isLoading,",
+      "    setIsLoading,",
+      "  };",
+      "}, \"$1\");",
+      "export type I$1Ctx = ICtxState<typeof use$1Ctx>;",
+    ],
+    "description": "useCtx"
+  },
+  "Issue Defaults": {
+    "prefix": "issue",
+    "body": [
+      "Assignees: mrlucciola",
+      "Labels: $1",
+      "Milestone: ${2:Refactor UI}",
+      "Projects: Portfolio Page",
+    ],
+    "description": "Issue Defaults"
+  },
+}

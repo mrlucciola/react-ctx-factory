@@ -1,0 +1,21 @@
+name: Increment app version
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  versioning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Calculate version
+        id: calculate-version
+        uses: bitshifted/git-auto-semver@v1
+        with:
+          create_tag: true
+      - name: Use version
+        run: |
+          echo "New version: ${{ steps.calculate-version.outputs.version-string }}"

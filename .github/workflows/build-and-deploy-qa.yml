@@ -1,0 +1,60 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy QA on PR merge
+run-name: "Deploy QA - Commit = ${{ github.sha }}"
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    types:
+      - closed
+    paths:
+      - "public/**/*"
+      - "src/**/*"
+      - "bun.lockb"
+permissions:
+  contents: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  if_merged:
+    if: github.event_name == 'push' || github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        id: checkout-main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Checkout to gh-pages branch
+        id: checkout-gh-pages
+        run: git checkout -B gh-pages
+
+      - name: Init bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Build from source
+        id: build-from-source
+        run: |
+          bun install
+          bun run build
+
+      - name: Deploy webpage
+        id: deploy-webpage
+        run: |
+          cp -a ./dist/* ./
+          rm -rf ./dist
+          git config user.email "47836741+mrlucciola@users.noreply.github.com"
+          git config user.name "mrlucciola"
+          git add .
+          git commit -m 'redeploying'
+          git push origin gh-pages --force

@@ -1,0 +1,32 @@
+name: Typecheck and build PR on create/update
+run-name: "Typecheck and build for PR: #${{ github.event.pull_request.number }} from branch ${{ github.event.pull_request.head.ref }}"
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+jobs:
+  typecheck-and-build-pr-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup bun env
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Checkout to PR branch
+        uses: actions/checkout@v4
+        id: checkout-pr-branch
+        with:
+          submodules: true # ref: github.event.pull_request.head.ref
+
+      - name: Install deps
+        id: install-deps
+        run: bun install
+
+      - name: Typecheck
+        id: typecheck-pr-source
+        run: bun run typecheck
+
+      - name: Build from source
+        id: build-pr-from-source
+        run: bun run build

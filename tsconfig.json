@@ -1,0 +1,73 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // @note testing ESNext
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext" // @note testing ESNext
+    ],
+    "module": "ESNext", // @note testing ESNext
+    "moduleDetection": "force", // @note testing
+    "allowJs": true, // @note testing
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": true,
+    "rootDir": ".",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "declaration": true,
+    "declarationMap": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true, // @note testing
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    // mui
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    // custom
+    "incremental": true,
+    // vite
+    "types": [
+      "vite/client",
+      "bun-types"
+    ],
+    "paths": {
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/common/*": [
+        "./src/common/*"
+      ],
+      "@/env/*": [
+        "./src/env/*"
+      ],
+    }
+  },
+  "include": [
+    "src/**/*",
+    "*.ts",
+    "*.tsx",
+    "vite.config.mts",
+    "vite.config.ts",
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*hidden*",
+    "**/*local*",
+    "**/dist/",
+    "**/*tsconfig.tsbuildinfo",
+  ]
+}

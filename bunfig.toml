@@ -1,0 +1,4 @@
+telemetry = false
+
+[build]
+outDir = "./dist"

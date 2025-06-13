@@ -63,7 +63,7 @@
   "scripts": {
     "dev": "NODE_ENV=local vite",
     "types": "tsc -p tsconfig.json",
-    "build": "bun build src/index.tsx --outdir dist && bun run types",
+    "build": "bun build src/ --outdir dist && bun run types",
     "prepare": "bun run build",
     "typecheck": "tsc --diagnostics --incremental --noEmit",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

@@ -54,6 +54,7 @@ const useCtxFactory = <THook extends TStateSelector, TCtx extends ReturnType<THo
 ): Record<ProviderLabel<TLabel>, FC<PropsWithChildren>> &
   Record<HookLabel<TLabel>, <TField>(selector: (state: TCtx) => TField) => TField> => {
   const Ctx = createContext<TCtx | null>(null);
+  Ctx.displayName = label + "Ctx";
 
   const Provider: FC<PropsWithChildren> = ({ children }) => (
     <Ctx.Provider value={useCtxHook()}>{children}</Ctx.Provider>

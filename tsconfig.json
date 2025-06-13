@@ -61,6 +61,5 @@
     "**/*.tsbuildinfo",
     "**/*.test.*",
     "**/vitest.*",
-    "**/tests",
   ]
 }

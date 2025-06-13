@@ -1,10 +1,10 @@
 import { useState, type FC } from "react";
 // testing
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 // local
 import "./setupTests";
-import useCtxFactory, { type ICtxState } from "src/index";
+import useCtxFactory, { type ICtxState } from "../src/index";
 
 const { useTestCtx, TestProvider } = useCtxFactory(() => {
   const [value, setValue] = useState("hello");

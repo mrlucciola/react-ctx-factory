@@ -17,7 +17,6 @@
     "useDefineForClassFields": true,
     "rootDir": ".",
     "outDir": "./dist",
-    "baseUrl": ".",
     "declaration": true,
     "declarationMap": true,
     /* Bundler mode */
@@ -26,7 +25,8 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
     "jsx": "react-jsx",
     /* Linting */
     "strict": true,
@@ -42,14 +42,15 @@
     "types": [
       "bun-types",
       "vitest/globals",
-      "jest-dom"
+      "@testing-library/jest-dom"
     ],
+    "baseUrl": ".",
   },
   "include": [
     "src/**/*",
+    "tests/**/*",
     "*.ts",
     "*.tsx",
-    "tests/**/*",
     "src/types/jest-dom.d.ts"
   ],
   "exclude": [
@@ -57,6 +58,9 @@
     "**/*hidden*",
     "**/*local*",
     "**/dist/",
-    "**/*tsconfig.tsbuildinfo",
+    "**/*.tsbuildinfo",
+    "**/*.test.*",
+    "**/vitest.*",
+    "**/tests",
   ]
 }

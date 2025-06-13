@@ -1,6 +1,6 @@
 {
   "name": "react-ctx-factory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Typed factory to create React Context providers and hooks with field-level selectors",
   "author": {
     "name": "Rocco Lucciola",
@@ -33,13 +33,14 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^19.1.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
@@ -61,12 +62,15 @@
   },
   "scripts": {
     "dev": "NODE_ENV=local vite",
-    "build": "bun build src/index.tsx --outdir dist",
+    "types": "tsc -p tsconfig.json",
+    "build": "bun build src/index.tsx --outdir dist && bun run types",
     "prepare": "bun run build",
     "typecheck": "tsc --diagnostics --incremental --noEmit",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest run",
     "test:ui": "vitest",
+    "test:node": "node --enable-source-maps ./node_modules/vitest/vitest.mjs run",
     "coverage": "vitest run --coverage"
-  }
+  },
+  "dependencies": {}
 }

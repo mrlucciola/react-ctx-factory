@@ -39,9 +39,7 @@
     "strictNullChecks": true,
     // custom
     "incremental": true,
-    // vite
     "types": [
-      "vite/client",
       "bun-types"
     ],
     "paths": {
@@ -60,8 +58,6 @@
     "src/**/*",
     "*.ts",
     "*.tsx",
-    "vite.config.mts",
-    "vite.config.ts",
   ],
   "exclude": [
     "node_modules",

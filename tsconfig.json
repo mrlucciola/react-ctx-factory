@@ -42,22 +42,12 @@
     "types": [
       "bun-types"
     ],
-    "paths": {
-      "@/components/*": [
-        "./src/components/*"
-      ],
-      "@/common/*": [
-        "./src/common/*"
-      ],
-      "@/env/*": [
-        "./src/env/*"
-      ],
-    }
   },
   "include": [
     "src/**/*",
     "*.ts",
     "*.tsx",
+    "tests/**/*"
   ],
   "exclude": [
     "node_modules",

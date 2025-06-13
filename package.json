@@ -54,7 +54,9 @@
     "eslint": "^9.28.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "typescript": "^5.8.3"
+    "jsdom": "^26.1.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
   },
   "scripts": {
     "dev": "NODE_ENV=local vite",
@@ -62,6 +64,7 @@
     "prepare": "bun run build",
     "typecheck": "tsc --diagnostics --incremental --noEmit",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "test": "bun test"
+    "test": "vitest run",
+    "test:ui": "vitest"
   }
 }

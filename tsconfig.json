@@ -40,14 +40,17 @@
     // custom
     "incremental": true,
     "types": [
-      "bun-types"
+      "bun-types",
+      "vitest/globals",
+      "jest-dom"
     ],
   },
   "include": [
     "src/**/*",
     "*.ts",
     "*.tsx",
-    "tests/**/*"
+    "tests/**/*",
+    "src/types/jest-dom.d.ts"
   ],
   "exclude": [
     "node_modules",

@@ -1,0 +1,39 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules/
+
+# testing
+/coverage
+
+# production
+build
+dist
+dist-ssr
+*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# misc
+.swc
+**/*DS_Store
+**/*hidden*
+**/*dist*/
+**/*tsconfig.tsbuildinfo
+.env
+.env.*
+.*.env
+
+npm-debug.log*
+
+**/*/local.*
+**/local.*
+
+src
+!**/*.test.ts
+!**/__tests__
